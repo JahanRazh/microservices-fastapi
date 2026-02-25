@@ -21,7 +21,7 @@ microservices-fastapi/
 │   └── data_service.py
 └── gateway/
     └── main.py          ← API Gateway (port 8000)
-                            + JWT Auth  (Activity 2)
+        auth.py             + JWT Auth  (Activity 2)
                             + Logging   (Activity 3)
                             + Error Handling (Activity 4)
 ```
@@ -168,6 +168,6 @@ Sample POST body:
 | Activity | Description                        | Location          |
 |----------|------------------------------------|-------------------|
 | 1        | Course Microservice (port 8002)    | `course-service/` |
-| 2        | JWT Authentication                 | `gateway/main.py` |
+| 2        | JWT Authentication                 | `gateway/auth.py` |
 | 3        | Request Logging Middleware         | `gateway/main.py` |
 | 4        | Enhanced Error Handling            | `gateway/main.py` |
