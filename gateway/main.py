@@ -3,7 +3,7 @@
 #           Activity 3 (Request Logging), Activity 4 (Enhanced Error Handling)
 
 from fastapi import FastAPI, HTTPException, Request, Depends, status
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from passlib.context import CryptContext
@@ -155,7 +155,7 @@ async def forward_request(service: str, path: str, method: str, **kwargs) -> Any
                 raise HTTPException(status_code=response.status_code, detail=detail)
 
             if response.status_code == 204 or not response.text:
-                return JSONResponse(content=None, status_code=response.status_code)
+                return Response(status_code=response.status_code)
 
             return JSONResponse(content=response.json(), status_code=response.status_code)
 
@@ -225,6 +225,10 @@ def read_root():
         "available_services": list(SERVICES.keys()),
         "docs": "/docs",
     }
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return Response(status_code=204)
 
 # ─────────────────────────────────────────────
 # Student Service Routes (secured with JWT)
